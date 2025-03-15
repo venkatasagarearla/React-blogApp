@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 
 const Blog = (e) => {
   const [blogObject, setblogObject] = useState({
@@ -7,6 +7,8 @@ const Blog = (e) => {
   });
   const [blogList, setBlogList] = useState([]);
 
+  const titleRef=useRef(null);
+
 
 const handleFormSubmit = (e) => {
     e.preventDefault();  
@@ -14,6 +16,7 @@ const handleFormSubmit = (e) => {
     if (blogObject.blogtitle.trim() !== "" && blogObject.blogContent.trim() !== "") {
       setBlogList([{ blogtitle: blogObject.blogtitle,  blogContent: blogObject.blogContent }, ...blogList]);
       setblogObject({ blogtitle: "", blogContent: "" }); 
+      titleRef.current.focus();
     }
   };
 
@@ -31,6 +34,7 @@ const handleFormSubmit = (e) => {
         <input
           type="text"
           value={blogObject.blogtitle}
+          ref={titleRef}
           onChange={(e) => setblogObject((prev) => ({ ...prev, blogtitle: e.target.value }))} 
         />
         <br></br>
