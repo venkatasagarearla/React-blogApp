@@ -15,6 +15,15 @@ const Blog = (e) => {
   
   }, [])
   
+  //
+  useEffect(()=>{
+  if(blogList.length && blogList[0].blogtitle){
+      document.title=blogList[0].blogtitle
+    }else{
+      document.title="no blogs here"
+    }
+    
+  },[blogList]);
 
 const handleFormSubmit = (e) => {
     e.preventDefault();  
@@ -23,6 +32,7 @@ const handleFormSubmit = (e) => {
       setBlogList([{ blogtitle: blogObject.blogtitle,  blogContent: blogObject.blogContent }, ...blogList]);
       setblogObject({ blogtitle: "", blogContent: "" }); 
       titleRef.current.focus();
+    
     }
   };
 
@@ -48,6 +58,7 @@ const handleFormSubmit = (e) => {
         <input
           type="text"
           value={blogObject.blogContent}
+          required
           onChange={(e) => setblogObject((prev) => ({ ...prev, blogContent: e.target.value }))}
         />
         <button type="submit">Add</button>
