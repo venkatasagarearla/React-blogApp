@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState,useEffect } from "react";
 
 const Blog = (e) => {
   const [blogObject, setblogObject] = useState({
@@ -9,6 +9,12 @@ const Blog = (e) => {
 
   const titleRef=useRef(null);
 
+  useEffect(() => {
+  
+  titleRef.current.focus()
+  
+  }, [])
+  
 
 const handleFormSubmit = (e) => {
     e.preventDefault();  
